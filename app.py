@@ -49,6 +49,14 @@ st.markdown(
 st.title("🧙 AI Content Alchemist")
 st.markdown("Transform long articles or transcripts into viral content using AI!")
 
+# API Key Input
+st.header("API Configuration")
+api_key = st.text_input(
+    "Enter your Google API Key (required for generation):",
+    type="password",
+    placeholder="Paste your Google AI API key here..."
+)
+
 # Input Section
 st.header("Input Your Content")
 input_text = st.text_area(
@@ -59,12 +67,14 @@ input_text = st.text_area(
 
 # Generate Button
 if st.button("Generate Viral Content"):
-    if not input_text.strip():
+    if not api_key.strip():
+        st.error("Please enter your Google API key.")
+    elif not input_text.strip():
         st.error("Please enter some text to generate content.")
     else:
         try:
             # Configure Gemini API
-            genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+            genai.configure(api_key=api_key)
             model = genai.GenerativeModel('gemini-pro')
             
             # Structured prompt for Gemini
