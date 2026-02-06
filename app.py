@@ -75,7 +75,7 @@ if st.button("Generate Viral Content"):
         try:
             # Configure Gemini API
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('gemini-1.5-flash')  # Updated model name
             
             # Structured prompt for Gemini
             prompt = f"""
