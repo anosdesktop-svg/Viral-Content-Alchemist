@@ -78,9 +78,9 @@ if st.button("Generate Viral Content"):
             
             # Try to use the specified model; fallback to listing models if error
             try:
-                model = genai.GenerativeModel('gemini-2.5-flash-lite')  # Updated to gemini-2.0-flash
+                model = genai.GenerativeModel('gemini-2.5-flash-lite')  # Updated to user-specified model
             except Exception as model_error:
-                st.warning(f"Model 'gemini-2.0-flash' not available: {str(model_error)}. Attempting to list available models...")
+                st.warning(f"Model 'gemini-2.5-flash-lite' not available: {str(model_error)}. Attempting to list available models...")
                 try:
                     models = genai.list_models()
                     available_models = [m.name for m in models if 'generateContent' in m.supported_generation_methods]
