@@ -76,11 +76,11 @@ if st.button("Generate Viral Content"):
             # Configure Gemini API
             genai.configure(api_key=api_key)
             
-            # Try to use the latest available model; fallback to listing models if error
+            # Try to use the specified model; fallback to listing models if error
             try:
-                model = genai.GenerativeModel('gemini-1.5-flash')  # Primary model
+                model = genai.GenerativeModel('gemini-2.0-flash')  # Updated to gemini-2.0-flash
             except Exception as model_error:
-                st.warning(f"Model 'gemini-1.5-flash' not available: {str(model_error)}. Attempting to list available models...")
+                st.warning(f"Model 'gemini-2.0-flash' not available: {str(model_error)}. Attempting to list available models...")
                 try:
                     models = genai.list_models()
                     available_models = [m.name for m in models if 'generateContent' in m.supported_generation_methods]
@@ -168,4 +168,4 @@ if st.button("Generate Viral Content"):
 
 # Footer
 st.markdown("---")
-st.markdown("Built with ❤️ using Streamlit and Google's Gemini Pro.")
+st.markdown("Built with ❤️ using Streamlit and Google's Gemini.")
