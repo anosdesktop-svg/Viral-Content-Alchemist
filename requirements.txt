@@ -1,2 +1,2 @@
 streamlit>=1.29.0
-google-generativeai>=0.8.0  # Updated to latest stable version
+google-generativeai>=0.8.3
