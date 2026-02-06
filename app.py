@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.copy_to_clipboard import copy_to_clipboard
 import google.generativeai as genai
 import re
 
@@ -112,14 +111,18 @@ if st.button("Generate Viral Content"):
                     thread = thread.strip()
                     st.subheader(f"Thread {i}")
                     st.text_area(f"Thread {i}", value=thread, height=150, key=f"thread_{i}")
-                    copy_to_clipboard(thread, f"Copy Thread {i}")
+                    if st.button(f"Copy Thread {i}"):
+                        st.copy_to_clipboard(thread)
+                        st.success("Copied to clipboard!")
             
             # Display TikTok Script
             if "TikTok/Reels Script" in sections:
                 st.header("🎥 TikTok/Reels Script (60s)")
                 script = sections["TikTok/Reels Script"]
                 st.text_area("Script", value=script, height=200, key="script")
-                copy_to_clipboard(script, "Copy Script")
+                if st.button("Copy Script"):
+                    st.copy_to_clipboard(script)
+                    st.success("Copied to clipboard!")
             
             # Display YouTube Headlines
             if "YouTube Headlines" in sections:
@@ -128,7 +131,9 @@ if st.button("Generate Viral Content"):
                 headlines = re.findall(r'\d+\.\s*(.+)', headlines_text)  # Extract numbered headlines
                 for i, headline in enumerate(headlines[:3], 1):  # Limit to 3
                     st.write(f"{i}. {headline}")
-                    copy_to_clipboard(headline, f"Copy Headline {i}")
+                    if st.button(f"Copy Headline {i}"):
+                        st.copy_to_clipboard(headline)
+                        st.success("Copied to clipboard!")
         
         except Exception as e:
             st.error(f"An error occurred: {str(e)}. Check your API key or try again.")
