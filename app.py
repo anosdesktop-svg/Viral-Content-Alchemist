@@ -75,7 +75,25 @@ if st.button("Generate Viral Content"):
         try:
             # Configure Gemini API
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-1.5-flash')  # Updated model name
+            
+            # Try to use the latest available model; fallback to listing models if error
+            try:
+                model = genai.GenerativeModel('gemini-1.5-flash')  # Primary model
+            except Exception as model_error:
+                st.warning(f"Model 'gemini-1.5-flash' not available: {str(model_error)}. Attempting to list available models...")
+                try:
+                    models = genai.list_models()
+                    available_models = [m.name for m in models if 'generateContent' in m.supported_generation_methods]
+                    st.info(f"Available models for generateContent: {', '.join(available_models)}")
+                    if available_models:
+                        model_name = available_models[0]  # Use the first available
+                        st.info(f"Using model: {model_name}")
+                        model = genai.GenerativeModel(model_name)
+                    else:
+                        raise Exception("No suitable models found.")
+                except Exception as list_error:
+                    st.error(f"Could not list models: {str(list_error)}. Please check your API key or library version.")
+                    st.stop()
             
             # Structured prompt for Gemini
             prompt = f"""
