@@ -96,7 +96,7 @@ if st.button("Generate Viral Content"):
             
             # Updated structured prompt with strict markers
             prompt = f"""
-            Based on the following content, generate the following in a strict format using the exact markers. Be creative, engaging, and optimized for virality.
+            Based on the following content, generate the following in a strict format using the exact markers. Be creative, engaging, and optimized for virality. Always respond in the same language as the input text.
 
             [TWITTER]
             Provide 5 catchy Twitter (X) threads. Each thread should be a series of 3-5 connected tweets (under 280 characters each), formatted as:
@@ -109,6 +109,9 @@ if st.button("Generate Viral Content"):
             [TIKTOK]
             Create a 60-second viral video script for TikTok/Reels. Include timestamps (e.g., 0-10s: Description), engaging hooks, and calls to action. Keep it concise and script-like.
 
+            [SECTION_INSTAGRAM]
+            Provide a viral Instagram Reel script and 5 trending hashtags.
+
             Content: {input_text}
             """
             
@@ -120,18 +123,21 @@ if st.button("Generate Viral Content"):
             def parse_sections(text):
                 sections = {}
                 # Split by markers
-                if '[TWITTER]' in text and '[YOUTUBE]' in text and '[TIKTOK]' in text:
+                if '[TWITTER]' in text and '[YOUTUBE]' in text and '[TIKTOK]' in text and '[SECTION_INSTAGRAM]' in text:
                     twitter_part = text.split('[TWITTER]')[1].split('[YOUTUBE]')[0].strip()
                     youtube_part = text.split('[YOUTUBE]')[1].split('[TIKTOK]')[0].strip()
-                    tiktok_part = text.split('[TIKTOK]')[1].strip()
+                    tiktok_part = text.split('[TIKTOK]')[1].split('[SECTION_INSTAGRAM]')[0].strip()
+                    instagram_part = text.split('[SECTION_INSTAGRAM]')[1].strip()
                     sections['Twitter Threads'] = twitter_part
                     sections['YouTube Headlines'] = youtube_part
                     sections['TikTok/Reels Script'] = tiktok_part
+                    sections['Instagram Reel Script and Hashtags'] = instagram_part
                 else:
                     # Fallback: try to extract if markers are missing or out of order
                     sections['Twitter Threads'] = "Content not found. Please try again."
                     sections['YouTube Headlines'] = "Content not found. Please try again."
                     sections['TikTok/Reels Script'] = "Content not found. Please try again."
+                    sections['Instagram Reel Script and Hashtags'] = "Content not found. Please try again."
                 return sections
             
             sections = parse_sections(generated_text)
@@ -164,6 +170,14 @@ if st.button("Generate Viral Content"):
             st.text_area("Script", value=script, height=200, key="script")
             if st.button("Copy Script"):
                 st.copy_to_clipboard(script)
+                st.success("Copied to clipboard!")
+            
+            # Display Instagram Reel Script and Hashtags (always show)
+            st.header("📸 Instagram Reel Script and Hashtags")
+            instagram_content = sections.get('Instagram Reel Script and Hashtags', 'No content generated.')
+            st.text_area("Instagram Content", value=instagram_content, height=200, key="instagram")
+            if st.button("Copy Instagram Content"):
+                st.copy_to_clipboard(instagram_content)
                 st.success("Copied to clipboard!")
         
         except Exception as e:
