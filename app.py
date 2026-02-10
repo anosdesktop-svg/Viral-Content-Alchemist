@@ -226,31 +226,21 @@ with col2:
                 for i, thread in enumerate(threads, 1):
                     st.write(f"Thread {i}:")
                     st.code(thread, language='text')
-                    if st.button(f"Copy Thread {i}", key=f"copy_thread_{i}"):
-                        st.copy_to_clipboard(thread)
-                        st.success("Copied to clipboard!")
+                    st.write("Copy manually.")
             elif platform == 'YouTube':
                 headlines = [h.strip() for h in content.split('\n') if h.strip()][:3]  # Limit to 3
                 for i, headline in enumerate(headlines, 1):
                     st.write(f"{i}. {headline}")
-                    if st.button(f"Copy Headline {i}", key=f"copy_headline_{i}"):
-                        st.copy_to_clipboard(headline)
-                        st.success("Copied to clipboard!")
+                    st.write("Copy manually.")
             elif platform == 'TikTok':
                 st.code(content, language='text')
-                if st.button("Copy Script", key="copy_script"):
-                    st.copy_to_clipboard(content)
-                    st.success("Copied to clipboard!")
+                st.write("Copy manually.")
             elif platform == 'Instagram':
                 st.code(content, language='text')
-                if st.button("Copy Instagram Content", key="copy_instagram"):
-                    st.copy_to_clipboard(content)
-                    st.success("Copied to clipboard!")
+                st.write("Copy manually.")
             elif platform == 'Article':
                 st.code(content, language='text')
-                if st.button("Copy Article", key="copy_article"):
-                    st.copy_to_clipboard(content)
-                    st.success("Copied to clipboard!")
+                st.write("Copy manually.")
         st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("Generate content to see results here.")
