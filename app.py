@@ -1,51 +1,60 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Set page config for cinematic studio theme
+# Set page config for dark studio theme
 st.set_page_config(
-    page_title="AI Content Alchemist",
+    page_title="Gen Z Content Alchemist",
     page_icon="🧙",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for cinematic studio aesthetic with glassmorphism and neon effects
+# Custom CSS for dark studio/cyberpunk aesthetic with glassmorphism and neon effects
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
     
-    /* Dark cinematic background with cyberpunk studio placeholder */
+    /* High-quality dark studio/cyberpunk background */
     .stApp {
-        background: url('https://source.unsplash.com/1600x900/?cyberpunk-studio,digital-art') no-repeat center center fixed;
+        background: url('https://source.unsplash.com/1600x900/?cyberpunk-studio,dark-tech') no-repeat center center fixed;
         background-size: cover;
         color: #ffffff;
         font-family: 'Orbitron', sans-serif;
     }
     
-    /* Glassmorphism card for inputs and outputs */
+    /* Neon cyan glow for title */
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /* Glassmorphism container */
     .glass-card {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 20px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
     
-    /* Neon Cyan/Purple glow for Generate button */
+    /* Gradient Purple to Blue button with hover glow */
     .stButton button {
-        background: linear-gradient(90deg, #00ffff, #8000ff);
+        background: linear-gradient(90deg, #6200ea, #03dac6);
         color: white;
         border: none;
         border-radius: 10px;
         padding: 10px 20px;
         font-weight: bold;
-        box-shadow: 0 0 15px #00ffff, 0 0 15px #8000ff;
         transition: all 0.3s ease;
     }
     .stButton button:hover {
-        box-shadow: 0 0 25px #00ffff, 0 0 25px #8000ff;
+        box-shadow: 0 0 15px #6200ea, 0 0 15px #03dac6;
         transform: scale(1.05);
     }
     
@@ -56,34 +65,34 @@ st.markdown(
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
     }
-    h1, h3 {
-        color: #ffffff;
+    h3 {
+        color: #00ffff;
         text-shadow: 0 0 5px #00ffff;
     }
     
-    /* Floating monitor style for right column */
-    .floating-monitor {
-        background: rgba(0, 0, 0, 0.8);
-        border: 2px solid #00ffff;
+    /* Glowing glass card for live monitor */
+    .live-monitor {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
         border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 20px;
         box-shadow: 0 0 20px #00ffff;
-        backdrop-filter: blur(10px);
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# App Title
-st.title("🧙 AI Content Alchemist")
+# App Title with neon cyan glow
+st.title("GEN Z CONTENT ALCHEMIST")
 st.markdown("Transform long articles or transcripts into viral content using AI!")
 
 # Layout using st.columns([1, 1.5])
 col1, col2 = st.columns([1, 1.5])
 
 with col1:
-    # Left Column: Inputs inside glassmorphism card
+    # Left Column: Inputs inside glassmorphism container
     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
     st.header("API Configuration")
     api_key = st.text_input(
@@ -199,9 +208,9 @@ with col1:
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    # Right Column: Floating Monitor for results
-    st.markdown('<div class="floating-monitor">', unsafe_allow_html=True)
-    st.header("Generated Content Monitor")
+    # Right Column: Live Monitor with glowing glass card
+    st.markdown('<div class="live-monitor">', unsafe_allow_html=True)
+    st.header("Live Content Monitor")
     if 'generated' in st.session_state and st.session_state['generated']:
         sections = st.session_state['sections']
         for platform in selected_platforms:
@@ -211,18 +220,23 @@ with col2:
                 threads = content.split('Thread ') if 'Thread ' in content else [content]
                 threads = [t.strip() for t in threads if t.strip()][:5]  # Limit to 5
                 for i, thread in enumerate(threads, 1):
-                    st.write(f"Thread {i}:")
+                    st.subheader(f"Thread {i}")
                     st.text_area(f"Thread {i}", value=thread, height=150, key=f"thread_{i}")
+                    st.write("Copy manually.")
             elif platform == 'YouTube':
                 headlines = [h.strip() for h in content.split('\n') if h.strip()][:3]  # Limit to 3
                 for i, headline in enumerate(headlines, 1):
                     st.write(f"{i}. {headline}")
+                    st.write("Copy manually.")
             elif platform == 'TikTok':
                 st.text_area("Script", value=content, height=200, key="script")
+                st.write("Copy manually.")
             elif platform == 'Instagram':
                 st.text_area("Instagram Content", value=content, height=200, key="instagram")
+                st.write("Copy manually.")
             elif platform == 'Article':
                 st.text_area("Article", value=content, height=400, key="article")
+                st.write("Copy manually.")
     else:
         st.write("Generate content to see results here.")
     st.markdown('</div>', unsafe_allow_html=True)
