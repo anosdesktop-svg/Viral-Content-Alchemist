@@ -1,6 +1,67 @@
 import streamlit as st
 import google.generativeai as genai
 
+# Add the new page config
+st.set_page_config(page_title='Gen Z AI', layout='wide')
+
+# Add the new CSS styling block
+st.markdown(
+    """
+    <style>
+    /* Professional Dark Mode Background */
+    body {
+        background-color: #0e1117;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Style buttons with gradient (Purple/Blue) and rounded corners */
+    .stButton button {
+        background: linear-gradient(45deg, #6200ea, #03dac6);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stButton button:hover {
+        background: linear-gradient(45deg, #3700b3, #018786);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Style text areas with a sleek dark border */
+    .stTextArea textarea {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border: 2px solid #333;
+        border-radius: 8px;
+        padding: 10px;
+        transition: border-color 0.3s ease;
+    }
+    .stTextArea textarea:focus {
+        border-color: #6200ea;
+        outline: none;
+    }
+    
+    /* Glassmorphism effect for cards and containers */
+    .stExpander, .stContainer, .stMarkdown {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Add professional CSS styling for dark theme and enhancements
 st.markdown(
     """
