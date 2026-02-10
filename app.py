@@ -1,6 +1,29 @@
 import streamlit as st
 import google.generativeai as genai
 
+# Add the new CSS styling block
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #0E1117;
+    }
+    body {
+        color: #FFFFFF;
+    }
+    .stButton button {
+        background: linear-gradient(to right, #7f00ff, #e100ff);
+        font-weight: bold;
+        border-radius: 10px;
+    }
+    .stTextInput input {
+        border: 1px solid #7f00ff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Add the new page config
 st.set_page_config(page_title='Gen Z AI', layout='wide')
 
