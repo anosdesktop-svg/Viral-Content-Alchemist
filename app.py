@@ -58,7 +58,7 @@ api_key = st.text_input(
 
 # Platform Selection
 st.header("Select Platforms")
-platforms = ['Twitter', 'YouTube', 'TikTok', 'Instagram', 'Article']
+platforms = ['Twitter', 'YouTube', 'TikTok', 'Instagram', 'Article', 'Telegram']
 selected_platforms = st.multiselect(
     "Choose the platforms you want to generate content for:",
     options=platforms,
@@ -114,7 +114,8 @@ if st.button("Generate Viral Content"):
                 'YouTube': "[YOUTUBE]\nSuggest 3 high-CTR (Click-Through Rate) headlines for YouTube videos. Make them sensational, curiosity-driven, and SEO-friendly.\n\n",
                 'TikTok': "[TIKTOK]\nCreate a 60-second viral video script for TikTok/Reels. Include timestamps (e.g., 0-10s: Description), engaging hooks, and calls to action. Keep it concise and script-like.\n\n",
                 'Instagram': "[SECTION_INSTAGRAM]\nProvide a viral Instagram Reel script and 5 trending hashtags.\n\n",
-                'Article': "[SECTION_ARTICLE]\nGenerate a professional, well-structured long-form article based on the input content.\n\n"
+                'Article': "[SECTION_ARTICLE]\nGenerate a professional, well-structured long-form article based on the input content.\n\n",
+                'Telegram': "[TELEGRAM]\nCreate a catchy headline using Emojis.\nWrite a concise, engaging post (Telegram users prefer short, direct info).\nInclude 3-5 relevant Hashtags at the end.\nSuggest a 'Call to Action' (e.g., Join our channel for more!).\n\n"
             }
             
             for platform in selected_platforms:
@@ -134,7 +135,8 @@ if st.button("Generate Viral Content"):
                     'YouTube': '[YOUTUBE]',
                     'TikTok': '[TIKTOK]',
                     'Instagram': '[SECTION_INSTAGRAM]',
-                    'Article': '[SECTION_ARTICLE]'
+                    'Article': '[SECTION_ARTICLE]',
+                    'Telegram': '[TELEGRAM]'
                 }
                 # Extract sections based on selected platforms
                 for i, platform in enumerate(selected_platforms):
@@ -158,7 +160,7 @@ if st.button("Generate Viral Content"):
             
             # Display content for each selected platform using expanders
             for platform in selected_platforms:
-                with st.expander(f"📱 {platform} Content" if platform == 'Twitter' else f"📺 {platform} Content" if platform == 'YouTube' else f"🎥 {platform} Content" if platform == 'TikTok' else f"📸 {platform} Content" if platform == 'Instagram' else f"📄 {platform} Content"):
+                with st.expander(f"📱 {platform} Content" if platform == 'Twitter' else f"📺 {platform} Content" if platform == 'YouTube' else f"🎥 {platform} Content" if platform == 'TikTok' else f"📸 {platform} Content" if platform == 'Instagram' else f"📄 {platform} Content" if platform == 'Article' else f"📢 {platform} Content"):
                     content = sections.get(platform, 'No content generated.')
                     if platform == 'Twitter':
                         threads = content.split('Thread ') if 'Thread ' in content else [content]
@@ -189,6 +191,11 @@ if st.button("Generate Viral Content"):
                     elif platform == 'Article':
                         st.text_area("Article", value=content, height=400, key="article")
                         if st.button("Copy Article", key="copy_article"):
+                            st.copy_to_clipboard(content)
+                            st.success("Copied to clipboard!")
+                    elif platform == 'Telegram':
+                        st.text_area("Telegram Post", value=content, height=200, key="telegram")
+                        if st.button("Copy Telegram Post", key="copy_telegram"):
                             st.copy_to_clipboard(content)
                             st.success("Copied to clipboard!")
         
