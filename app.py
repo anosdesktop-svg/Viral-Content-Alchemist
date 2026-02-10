@@ -1,6 +1,86 @@
 import streamlit as st
 import google.generativeai as genai
 
+# Add professional CSS styling for dark theme and enhancements
+st.markdown(
+    """
+    <style>
+    /* Professional Dark Theme Background */
+    body {
+        background-color: #0e1117;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        animation: fadeIn 1s ease-in-out;
+    }
+    
+    /* Fade-in animation for the entire page */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Style all buttons with gradient background, rounded corners, and hover effect */
+    .stButton button {
+        background: linear-gradient(45deg, #6200ea, #03dac6);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stButton button:hover {
+        background: linear-gradient(45deg, #3700b3, #018786);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Customize Text Input and Text Area boxes */
+    .stTextInput input, .stTextArea textarea {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border: 1px solid #4f4f4f;
+        border-radius: 5px;
+        padding: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stTextInput input:focus, .stTextArea textarea:focus {
+        border-color: #6200ea;
+        box-shadow: 0 0 8px rgba(98, 0, 234, 0.5);
+        outline: none;
+    }
+    
+    /* Style Titles (h1) and Subheaders (h3) */
+    h1 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #ffffff;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #c0c0c0; /* Silver color */
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    
+    /* Additional tweaks for overall professionalism */
+    .stMarkdown {
+        color: #ffffff;
+    }
+    .stExpander {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 5px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Set page config for dark theme and professional layout
 st.set_page_config(
     page_title="AI Content Alchemist",
