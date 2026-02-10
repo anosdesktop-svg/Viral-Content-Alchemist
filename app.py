@@ -208,7 +208,7 @@ if st.button("Generate Visual"):
             genai.configure(api_key=api_key)
             
             # Use Gemini to generate a concise image prompt based on the input
-            prompt_model = genai.GenerativeModel('gemini-1.5-flash')  # Use a lightweight model for prompt
+            prompt_model = genai.GenerativeModel('gemini-2.5-flash-lite')  # Use a lightweight model for prompt
             image_prompt_response = prompt_model.generate_content(f"Create a short, descriptive prompt for an image generation AI based on this content: {input_text[:500]}... Make it visual and relevant.")
             image_prompt = image_prompt_response.text.strip()
             
