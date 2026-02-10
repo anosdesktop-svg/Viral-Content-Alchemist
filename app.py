@@ -115,7 +115,7 @@ if st.button("Generate Viral Content"):
                 'TikTok': "[TIKTOK]\nCreate a 60-second viral video script for TikTok/Reels. Include timestamps (e.g., 0-10s: Description), engaging hooks, and calls to action. Keep it concise and script-like.\n\n",
                 'Instagram': "[SECTION_INSTAGRAM]\nProvide a viral Instagram Reel script and 5 trending hashtags.\n\n",
                 'Article': "[SECTION_ARTICLE]\nGenerate a professional, well-structured long-form article based on the input content.\n\n",
-                'Telegram': "[TELEGRAM]\nCreate a catchy headline using Emojis.\nWrite a concise, engaging post (Telegram users prefer short, direct info).\nInclude 3-5 relevant Hashtags at the end.\nSuggest a 'Call to Action' (e.g., Join our channel for more!).\n\n"
+                'Telegram': "[TELEGRAM]\nStyle: Viral, community-focused, and uses bold headings.\nStructure: Start with a catchy headline and emojis, followed by the main value points, and end with a 'Join for more' call to action.\nFormatting: Use bullet points for readability.\n\n"
             }
             
             for platform in selected_platforms:
