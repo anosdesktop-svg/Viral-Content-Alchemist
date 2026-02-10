@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+import openai  # Added for image generation using DALL-E
 
 # Set page config for dark theme and professional layout
 st.set_page_config(
@@ -54,6 +55,11 @@ api_key = st.text_input(
     "Enter your Google API Key (required for generation):",
     type="password",
     placeholder="Paste your Google AI API key here..."
+)
+openai_api_key = st.text_input(
+    "Enter your OpenAI API Key (required for image generation):",
+    type="password",
+    placeholder="Paste your OpenAI API key here..."
 )
 
 # Platform Selection
@@ -194,6 +200,41 @@ if st.button("Generate Viral Content"):
         
         except Exception as e:
             st.error(f"An error occurred: {str(e)}. Check your API key or try again.")
+
+# Added Image Generation Feature
+st.header("Generate Visual Content")
+if st.button("Generate Visual"):
+    if not openai_api_key.strip():
+        st.error("Please enter your OpenAI API key for image generation.")
+    elif not input_text.strip():
+        st.error("Please enter some text to generate content first.")
+    else:
+        try:
+            # Configure OpenAI API
+            openai.api_key = openai_api_key
+            
+            # Intelligently derive image prompt from user's input text and generated content (if available)
+            # Use Gemini to generate a concise image prompt based on the input
+            genai.configure(api_key=api_key)  # Reuse Google API for prompt generation
+            prompt_model = genai.GenerativeModel('gemini-1.5-flash')  # Use a lightweight model for prompt
+            image_prompt_response = prompt_model.generate_content(f"Create a short, descriptive prompt for an image generation AI based on this content: {input_text[:500]}... Make it visual and relevant.")
+            image_prompt = image_prompt_response.text.strip()
+            
+            # Generate image using DALL-E
+            response = openai.Image.create(
+                prompt=image_prompt,
+                n=1,
+                size="512x512"
+            )
+            image_url = response['data'][0]['url']
+            
+            # Display the generated image in an expander
+            with st.expander("🎨 AI-Generated Visual"):
+                st.image(image_url, caption="Generated Image", use_column_width=True)
+                st.success("Image generated successfully!")
+        
+        except Exception as e:
+            st.error(f"An error occurred during image generation: {str(e)}. Check your OpenAI API key or try again.")
 
 # Footer
 st.markdown("---")
