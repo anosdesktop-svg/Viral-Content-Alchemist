@@ -1,17 +1,48 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Add the new CSS styling block at the very beginning
+# Add the futuristic Content Creator Studio theme styling block at the very beginning
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    
     .stApp {
-        background: linear-gradient(135deg, #0e1117 0%, #161b22 100%);
+        background: url('https://source.unsplash.com/1600x900/?content-creation,digital-media,neon-tech') no-repeat center center fixed;
+        background-size: cover;
         color: white;
+        font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Glassmorphism effect for readability over background image */
+    .stExpander, .stTextArea, .stTextInput, .stMarkdown, .stContainer {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Neon borders for input fields and buttons */
+    .stTextInput input, .stTextArea textarea {
+        border: 2px solid #00f2ff;
+        box-shadow: 0 0 10px #00f2ff;
     }
     .stButton button {
+        border: 2px solid #7000ff;
+        box-shadow: 0 0 10px #7000ff;
         background: linear-gradient(to right, #6200ea, #03dac6);
         border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+    
+    /* Futuristic font for titles */
+    h1, h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #ffffff;
+        text-shadow: 0 0 10px #00f2ff;
     }
     </style>
     """,
