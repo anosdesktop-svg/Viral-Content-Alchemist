@@ -1,23 +1,17 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Add the new CSS styling block
+# Add the new CSS styling block at the very beginning
 st.markdown(
     """
     <style>
     .stApp {
-        background-color: #0E1117;
-    }
-    body {
-        color: #FFFFFF;
+        background: linear-gradient(135deg, #0e1117 0%, #161b22 100%);
+        color: white;
     }
     .stButton button {
-        background: linear-gradient(to right, #7f00ff, #e100ff);
-        font-weight: bold;
+        background: linear-gradient(to right, #6200ea, #03dac6);
         border-radius: 10px;
-    }
-    .stTextInput input {
-        border: 1px solid #7f00ff;
     }
     </style>
     """,
