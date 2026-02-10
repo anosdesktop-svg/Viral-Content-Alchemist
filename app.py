@@ -1,48 +1,50 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Add the futuristic Content Creator Studio theme styling block at the very beginning
+# Add the Content Creator Studio aesthetic styling block at the very beginning
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
     
     .stApp {
-        background: url('https://source.unsplash.com/1600x900/?content-creation,digital-media,neon-tech') no-repeat center center fixed;
+        background: url('https://source.unsplash.com/1600x900/?cyberpunk-workstation,digital-creator') no-repeat center center fixed;
         background-size: cover;
         color: white;
-        font-family: 'Orbitron', sans-serif;
     }
     
-    /* Glassmorphism effect for readability over background image */
-    .stExpander, .stTextArea, .stTextInput, .stMarkdown, .stContainer {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Blurry Glass effect for all containers */
+    .stExpander, .stContainer, .stTextArea, .stTextInput, .stMarkdown {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         padding: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
-    /* Neon borders for input fields and buttons */
-    .stTextInput input, .stTextArea textarea {
-        border: 2px solid #00f2ff;
-        box-shadow: 0 0 10px #00f2ff;
-    }
+    /* Futuristic Glow for buttons */
     .stButton button {
-        border: 2px solid #7000ff;
-        box-shadow: 0 0 10px #7000ff;
-        background: linear-gradient(to right, #6200ea, #03dac6);
-        border-radius: 10px;
+        background: linear-gradient(to right, #ff00ff, #00ffff);
         color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
         font-weight: bold;
+        box-shadow: 0 0 10px #ff00ff;
+        transition: all 0.3s ease;
+    }
+    .stButton button:hover {
+        box-shadow: 0 0 20px #00ffff, 0 0 30px #ff00ff;
+        transform: scale(1.05);
     }
     
-    /* Futuristic font for titles */
-    h1, h3 {
+    /* Futuristic Typography for main title */
+    h1 {
         font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
         color: #ffffff;
-        text-shadow: 0 0 10px #00f2ff;
+        text-shadow: 0 0 10px #00ffff;
     }
     </style>
     """,
@@ -234,7 +236,7 @@ st.markdown(
 )
 
 # App Title
-st.title("🧙 AI Content Alchemist")
+st.title("Gen Z Content Alchemist")
 st.markdown("Transform long articles or transcripts into viral content using AI!")
 
 # API Key Input
